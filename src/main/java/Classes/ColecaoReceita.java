@@ -24,9 +24,9 @@ public class ColecaoReceita
         return receitas;
     }
 
-    public void removerReceita(String titulo)
+    public void removerReceita(int titulo)
     {
-        if(titulo != null)
+        if(titulo != -1)
         {
             receitas.remove(titulo);
         }
