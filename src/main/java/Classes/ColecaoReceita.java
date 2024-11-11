@@ -36,8 +36,7 @@ public class ColecaoReceita
         }
     }
 
-    public void editarReceita(String titulo, Receita novaReceita)
+    public void editarReceita(int titulo, Receita novaReceita)
     {
-        
     }
 }
