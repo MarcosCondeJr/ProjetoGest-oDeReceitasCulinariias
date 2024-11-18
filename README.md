@@ -1,4 +1,4 @@
-# ProjetoGest-o-de-Receitas-Culin-rias
+# Projeto de Gestão de Receitas Culinárias
 Trabalho de POO em java do senai, projeto sendo feito por:\n
 
  - Marcos Conde 
