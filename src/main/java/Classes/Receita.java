@@ -2,7 +2,7 @@ package Classes;
 
 public class Receita
 {
-    protected static int geradorId = 0;
+    protected static int geradorId = 01;
     protected int id;
     protected String titulo;
     protected String categoria;

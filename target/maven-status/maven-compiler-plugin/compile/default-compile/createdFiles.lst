@@ -7,6 +7,8 @@ Views\ListaDeReceitas$4.class
 Views\CadastroReceitaView$2.class
 Classes\ColecaoReceita.class
 Classes\Receita.class
+Views\EditarReceita$4.class
+Views\EditarReceita$5.class
 Main.class
 Views\ListaDeReceitas$6.class
 Views\CadastroReceitaView$5.class

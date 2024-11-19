@@ -8,6 +8,7 @@ import Classes.ColecaoReceita;
 import Classes.Receita;
 import Classes.ReceitaDoce;
 import Classes.ReceitaSalgado;
+import Views.ListaDeReceitas;
 import javax.swing.JOptionPane;
 
 /**
@@ -16,13 +17,18 @@ import javax.swing.JOptionPane;
  */
 public class EditarReceita extends javax.swing.JFrame {
 
-    ColecaoReceita colecao;
-    Receita receita;
+    private static ListaDeReceitas ListaDeReceitas;
+
+    protected ColecaoReceita colecao;
+    protected Receita receita;
+    ListaDeReceitas parent;
+    
     /**
      * Creates new form EditarReceita
      */
-    public EditarReceita(ColecaoReceita colecao, Receita receita) {
+    public EditarReceita(ListaDeReceitas parent,ColecaoReceita colecao, Receita receita) {
         initComponents();
+        this.parent = parent;
         this.receita = receita;
         this.colecao = colecao;
         preencherCampos();
@@ -47,12 +53,14 @@ public class EditarReceita extends javax.swing.JFrame {
         txtEditTitulo = new javax.swing.JTextField();
         btnListar = new javax.swing.JButton();
         btnSalvar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Signatra DEMO", 0, 48)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 153, 51));
         jLabel1.setText("Cadastro de Receitas");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jLabel2.setFont(new java.awt.Font("Signatra DEMO", 0, 48)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 153, 0));
@@ -75,12 +83,28 @@ public class EditarReceita extends javax.swing.JFrame {
             }
         });
 
+        btnListar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnListar.setText("Ver Lista");
+        btnListar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnListarActionPerformed(evt);
+            }
+        });
 
+        btnSalvar.setBackground(new java.awt.Color(0, 204, 51));
+        btnSalvar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnSalvar.setText("Salvar");
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalvarActionPerformed(evt);
+            }
+        });
+
+        jButton1.setBackground(new java.awt.Color(204, 0, 0));
+        jButton1.setText("Fechar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -95,7 +119,7 @@ public class EditarReceita extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnListar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnListar, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(143, 143, 143)
@@ -108,8 +132,13 @@ public class EditarReceita extends javax.swing.JFrame {
                 .addGap(176, 176, 176))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(204, 204, 204))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(204, 204, 204))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(26, 26, 26))))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                     .addContainerGap(354, Short.MAX_VALUE)
@@ -119,7 +148,9 @@ public class EditarReceita extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(50, Short.MAX_VALUE)
+                .addContainerGap(15, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -133,9 +164,9 @@ public class EditarReceita extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtEditDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
+                .addGap(28, 28, 28)
                 .addComponent(btnListar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44))
+                .addGap(43, 43, 43))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                     .addContainerGap(342, Short.MAX_VALUE)
@@ -144,6 +175,7 @@ public class EditarReceita extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtEditTituloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEditTituloActionPerformed
@@ -173,31 +205,40 @@ public class EditarReceita extends javax.swing.JFrame {
         receita.setTitulo(novoTitulo);
         receita.setDescricao(novaDescricao);
         
-        if ("Doce".equals(categoriaSelecionada)) 
-        {
-            if (!(receita instanceof ReceitaDoce)) 
-            {
-                receita = new ReceitaDoce(novoTitulo, novaDescricao);  // Troca a categoria, caso necessário
-            }
-        } 
-        else if ("Salgado".equals(categoriaSelecionada)) 
-        {
-            if (!(receita instanceof ReceitaSalgado)) 
-            {
-                receita = new ReceitaSalgado(novoTitulo, novaDescricao);  // Troca a categoria, caso necessário
-            }
+if ("Doce".equals(categoriaSelecionada)) {
+        if (!(receita instanceof ReceitaDoce)) {
+            receita = new ReceitaDoce(receita.getId(), novoTitulo, novaDescricao); // Cria novo objeto, mas mantém o ID
         }
+    } else if ("Salgado".equals(categoriaSelecionada)) {
+        if (!(receita instanceof ReceitaSalgado)) {
+            receita = new ReceitaSalgado(receita.getId(), novoTitulo, novaDescricao); // Cria novo objeto, mas mantém o ID
+        }
+    }
         
         boolean atualizado = colecao.editarReceita(receita);
-        if (atualizado) 
-        {
+        if (atualizado) {
             JOptionPane.showMessageDialog(this, "Receita atualizada com sucesso!");
             this.dispose();
-        } else 
-        {
-            JOptionPane.showMessageDialog(this, "Erro ao atualizar a receita.");
+            ListaDeReceitas telaListar = new ListaDeReceitas(null, true, colecao);
+        telaListar.setVisible(true);
+        if (parent != null) {
+            parent.exibeReceitas();
         }
+}
+
     }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void btnListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarActionPerformed
+        this.dispose();
+        ListaDeReceitas telaListar = new ListaDeReceitas(null, true, colecao);
+        telaListar.setVisible(true);
+    }//GEN-LAST:event_btnListarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.dispose();
+        ListaDeReceitas telaListar = new ListaDeReceitas(null, true, colecao);
+        telaListar.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void preencherCampos() 
     {
@@ -240,14 +281,14 @@ public class EditarReceita extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(EditarReceita.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
+        ListaDeReceitas = new ListaDeReceitas(null, true);
         ColecaoReceita colecao = new ColecaoReceita();
         Receita receita = new Receita();
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EditarReceita(colecao, receita).setVisible(true);
+                new EditarReceita(ListaDeReceitas,colecao, receita).setVisible(true);
             }
         });
     }
@@ -255,6 +296,7 @@ public class EditarReceita extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnListar;
     private javax.swing.JButton btnSalvar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -264,4 +306,8 @@ public class EditarReceita extends javax.swing.JFrame {
     private javax.swing.JTextField txtEditDescricao;
     private javax.swing.JTextField txtEditTitulo;
     // End of variables declaration//GEN-END:variables
+
+    private void btnListarActionPerformed(boolean b) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

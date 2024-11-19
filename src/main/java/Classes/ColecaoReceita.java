@@ -41,8 +41,9 @@ public class ColecaoReceita
         for (int i = 0; i < receitas.size(); i++) {
             if (receitas.get(i).getId() == novaReceita.getId()) {
                 receitas.set(i, novaReceita); // Atualiza a receita na lista
-                break;
+                return true;
             }
         }
+     return false;
     }
 }
