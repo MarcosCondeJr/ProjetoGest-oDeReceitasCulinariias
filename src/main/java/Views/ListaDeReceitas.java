@@ -180,6 +180,7 @@ public class ListaDeReceitas extends javax.swing.JDialog
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -219,10 +220,21 @@ public class ListaDeReceitas extends javax.swing.JDialog
         
         if(selecionado != -1)
         {
-            tblReceitas.getCellEditor().addCellEditorListener(tblReceitas);
+            int idReceita = (int) tblReceitas.getValueAt(selecionado, 0);
+            Receita receitaSelecionada = colecao.listarReceita().get(idReceita - 1);
+            abrirTelaEdicao(receitaSelecionada);
+        }
+        else 
+        {
+            JOptionPane.showMessageDialog(this, "Selecione uma receita para editar.");
         }
     }//GEN-LAST:event_btnEditMouseClicked
 
+    private void abrirTelaEdicao(Receita receitaSelecionada) {
+        EditarReceita telaEdicao = new EditarReceita(receitaSelecionada);
+        telaEdicao.setVisible(true); // Exibe a tela de edição
+    }
+        
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnEditActionPerformed

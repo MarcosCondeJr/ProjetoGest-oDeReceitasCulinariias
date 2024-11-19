@@ -4,17 +4,28 @@
  */
 package Views;
 
+import Classes.ColecaoReceita;
+import Classes.Receita;
+import Classes.ReceitaDoce;
+import Classes.ReceitaSalgado;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Marcos Conde
  */
 public class EditarReceita extends javax.swing.JFrame {
 
+    ColecaoReceita colecao;
+    Receita receita;
     /**
      * Creates new form EditarReceita
      */
-    public EditarReceita() {
+    public EditarReceita(ColecaoReceita colecao, Receita receita) {
         initComponents();
+        this.receita = receita;
+        this.colecao = colecao;
+        preencherCampos();
     }
 
     /**
@@ -140,9 +151,69 @@ public class EditarReceita extends javax.swing.JFrame {
     }//GEN-LAST:event_txtEditTituloActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        // TODO add your handling code here:
+        String novoTitulo = txtEditTitulo.getText();
+        String novaDescricao = txtEditDescricao.getText();
+        String categoriaSelecionada = (String) jComboBox1.getSelectedItem();
+        
+        if(novoTitulo.isEmpty())
+        {
+            JOptionPane.showMessageDialog(this, "O título não pode estar vazio.");
+            return;
+        }
+        if (novaDescricao.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "A descrição não pode estar vazia.");
+            return;
+        }
+        if ("Selecione uma categoria".equals(categoriaSelecionada)) {
+            JOptionPane.showMessageDialog(this, "Por favor, selecione uma categoria.");
+            return;
+        }
+        
+        //Salva as alterações
+        receita.setTitulo(novoTitulo);
+        receita.setDescricao(novaDescricao);
+        
+        if ("Doce".equals(categoriaSelecionada)) 
+        {
+            if (!(receita instanceof ReceitaDoce)) 
+            {
+                receita = new ReceitaDoce(novoTitulo, novaDescricao);  // Troca a categoria, caso necessário
+            }
+        } 
+        else if ("Salgado".equals(categoriaSelecionada)) 
+        {
+            if (!(receita instanceof ReceitaSalgado)) 
+            {
+                receita = new ReceitaSalgado(novoTitulo, novaDescricao);  // Troca a categoria, caso necessário
+            }
+        }
+        
+        boolean atualizado = colecao.editarReceita(receita);
+        if (atualizado) 
+        {
+            JOptionPane.showMessageDialog(this, "Receita atualizada com sucesso!");
+            this.dispose();
+        } else 
+        {
+            JOptionPane.showMessageDialog(this, "Erro ao atualizar a receita.");
+        }
     }//GEN-LAST:event_btnSalvarActionPerformed
 
+    private void preencherCampos() 
+    {
+        txtEditTitulo.setText(receita.getTitulo());
+        txtEditDescricao.setText(receita.getDescricao());
+        
+        if (receita instanceof ReceitaDoce) 
+        {
+        jComboBox1.setSelectedItem("Doce");
+        } 
+        else if (receita instanceof ReceitaSalgado) 
+        {
+        jComboBox1.setSelectedItem("Salgado");
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -169,11 +240,14 @@ public class EditarReceita extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(EditarReceita.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        
+        ColecaoReceita colecao = new ColecaoReceita();
+        Receita receita = new Receita();
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EditarReceita().setVisible(true);
+                new EditarReceita(colecao, receita).setVisible(true);
             }
         });
     }

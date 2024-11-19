@@ -2,12 +2,15 @@ package Classes;
 
 public class Receita
 {
-    private String titulo;
-    private String categoria;
-    private String descricao;
+    protected static int geradorId = 0;
+    protected int id;
+    protected String titulo;
+    protected String categoria;
+    protected String descricao;
 
     public Receita(String titulo, String categoria, String descricao)
     {
+        this.id = geradorId++;
         this.titulo = titulo;
         this.categoria = categoria;
         this.descricao = descricao;
@@ -15,6 +18,16 @@ public class Receita
     
     public Receita(){}
 
+    public int getId()
+    {
+        return this.id;
+    }
+    
+    public void setId(int id)
+    {
+        this.id = id;
+    }
+    
     public String getTitulo()
     {
         return titulo;

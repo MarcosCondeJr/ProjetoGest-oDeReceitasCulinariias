@@ -36,7 +36,13 @@ public class ColecaoReceita
         }
     }
 
-    public void editarReceita(int titulo, Receita novaReceita)
+    public boolean editarReceita(Receita novaReceita)
     {
+        for (int i = 0; i < receitas.size(); i++) {
+            if (receitas.get(i).getId() == novaReceita.getId()) {
+                receitas.set(i, novaReceita); // Atualiza a receita na lista
+                break;
+            }
+        }
     }
 }
