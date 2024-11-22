@@ -58,10 +58,15 @@ public class Receita
         this.descricao = descricao;
     }
 
-    public void exibirReceita()
-    {
-        System.out.println("Titulo: " + this.titulo
-                         + "Categoria: " + this.categoria
-                         + "Descrição: " + this.descricao);
+    @Override
+    public String toString() {
+        return "Receita{" + "id=" + id + ", titulo=" + titulo + ", categoria=" + categoria + ", descricao=" + descricao + '}';
+    }
+    
+    public void exibirReceita() {
+        System.out.println("ID: " + id);
+        System.out.println("Título: " + titulo);
+        System.out.println("Categoria: " + categoria);
+        System.out.println("Descrição: " + descricao);
     }
 }

@@ -205,7 +205,7 @@ public class EditarReceita extends javax.swing.JFrame {
         receita.setTitulo(novoTitulo);
         receita.setDescricao(novaDescricao);
         
-if ("Doce".equals(categoriaSelecionada)) {
+    if ("Doce".equals(categoriaSelecionada)) {
         if (!(receita instanceof ReceitaDoce)) {
             receita = new ReceitaDoce(receita.getId(), novoTitulo, novaDescricao); // Cria novo objeto, mas mantém o ID
         }

@@ -10,4 +10,11 @@ public class ReceitaDoce extends Receita
         super(titulo, "Doce", descricao);
         this.id = id;
     }
+   
+    public void exibirReceita() {
+        System.out.println("ID: " + id);
+        System.out.println("Título: " + titulo);
+        System.out.println("Categoria: " + categoria);
+        System.out.println("Descrição: " + descricao);
+    }
 }
