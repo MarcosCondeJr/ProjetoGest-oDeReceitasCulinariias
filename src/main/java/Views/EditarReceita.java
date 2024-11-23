@@ -21,14 +21,14 @@ public class EditarReceita extends javax.swing.JFrame {
 
     protected ColecaoReceita colecao;
     protected Receita receita;
-    ListaDeReceitas parent;
+    ListaDeReceitas lista;
     
     /**
      * Creates new form EditarReceita
      */
-    public EditarReceita(ListaDeReceitas parent,ColecaoReceita colecao, Receita receita) {
+    public EditarReceita(ListaDeReceitas lista,ColecaoReceita colecao, Receita receita) {
         initComponents();
-        this.parent = parent;
+        this.lista = lista;
         this.receita = receita;
         this.colecao = colecao;
         preencherCampos();
@@ -205,15 +205,15 @@ public class EditarReceita extends javax.swing.JFrame {
         receita.setTitulo(novoTitulo);
         receita.setDescricao(novaDescricao);
         
-    if ("Doce".equals(categoriaSelecionada)) {
-        if (!(receita instanceof ReceitaDoce)) {
-            receita = new ReceitaDoce(receita.getId(), novoTitulo, novaDescricao); // Cria novo objeto, mas mantém o ID
+        if ("Doce".equals(categoriaSelecionada)) {
+            if (!(receita instanceof ReceitaDoce)) {
+                receita = new ReceitaDoce(receita.getId(), novoTitulo, novaDescricao); // Cria novo objeto, mas mantém o ID
+            }
+        } else if ("Salgado".equals(categoriaSelecionada)) {
+            if (!(receita instanceof ReceitaSalgado)) {
+                receita = new ReceitaSalgado(receita.getId(), novoTitulo, novaDescricao); // Cria novo objeto, mas mantém o ID
+            }
         }
-    } else if ("Salgado".equals(categoriaSelecionada)) {
-        if (!(receita instanceof ReceitaSalgado)) {
-            receita = new ReceitaSalgado(receita.getId(), novoTitulo, novaDescricao); // Cria novo objeto, mas mantém o ID
-        }
-    }
         
         boolean atualizado = colecao.editarReceita(receita);
         if (atualizado) {
@@ -221,8 +221,8 @@ public class EditarReceita extends javax.swing.JFrame {
             this.dispose();
             ListaDeReceitas telaListar = new ListaDeReceitas(null, true, colecao);
         telaListar.setVisible(true);
-        if (parent != null) {
-            parent.exibeReceitas();
+        if (lista != null) {
+            lista.exibeReceitas();
         }
 }
 

@@ -45,12 +45,18 @@ public class ListaDeReceitas extends javax.swing.JDialog
             Receita receita = receitas.get(i);
             model.addRow(new Object[]
             {
-                i+1,
+                receita.getId(),
                 receita.getTitulo(),
                 receita.getCategoria(),
                 receita.getDescricao()
             });
         }
+        
+        if(receitas.isEmpty())
+        {
+            JOptionPane.showMessageDialog(this, "Não há receitas cadastradas","Aviso",JOptionPane.INFORMATION_MESSAGE);
+        }
+        
     }    
 
     @SuppressWarnings("unchecked")
